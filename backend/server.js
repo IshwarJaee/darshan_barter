@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
-const rateLimit = require("express-rate-limit");
 
 const app = express();
 
@@ -56,15 +55,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, message: 'Something went wrong!' });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`\n🚀 DarshanBarter Backend → https://dbfincorp.com`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n🚀 DarshanBarter Backend → http://localhost:${PORT}`);
   console.log(`📦 Environment: ${process.env.NODE_ENV || 'development'}\n`);
 });
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, 
-  max: 100
-});
-
-app.use(limiter);
